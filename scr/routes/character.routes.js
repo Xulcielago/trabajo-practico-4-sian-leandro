@@ -4,8 +4,8 @@ import { createCharacter, getALLCharacter, deleteCharacter  } from '../controlle
 
 
 
-routerDBZ.post("/character", createCharacter)
-routerDBZ.get("/character", getALLCharacter)
-routerDBZ.delete("/character", deleteCharacter)
+routerDBZ.post("/characters", createCharacter)
+routerDBZ.get("/characters", getALLCharacter)
+routerDBZ.delete("/characters", deleteCharacter)
 
 export default routerDBZ
