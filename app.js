@@ -1,5 +1,8 @@
 import express from "express";
+import dotenv from "dotenv";
+dotenv.config()
 import { startDb } from "./scr/config/database.js";
+
 
 //Leyendo variables de entorno nativamente
 process.loadEnvFile();
