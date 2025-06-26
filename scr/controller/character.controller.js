@@ -1,11 +1,13 @@
 
 import character from "../models/character.js";
-
+function capitalize(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
 
 //Crear personajes
 export const createCharacter = async (req, res) => {
     try {
-        let { name, ki, race, gender } = req.body;
+        let { name, ki, race, gender, description} = req.body;
 
         //Validaciones:
         let validarNombre = await character.findOne({ where: { name } })
@@ -23,12 +25,22 @@ export const createCharacter = async (req, res) => {
         if (race.trim() === '') {
             return res.status(400).json({ message: "Error: Raza del personaje no debe ser vacío" })
         }
+        let capitalizeGender = capitalize(gender.trim())
 
-        if ((gender !== "male") && (gender !== "female")) {
+        if ((capitalizeGender !== "Male") && (capitalizeGender !== "Female")) {
+           
             return res.status(400).json({ message: "Campo gender solo acepta los valores male y female" })
         }
 
-        const char = await character.create(req.body)
+		const formattedCharacter = {
+			name: name,
+			ki: ki,
+			race: race,
+			gender: capitalizeGender,
+			description: description || '',
+		};
+
+        const char = await character.create(formattedCharacter)
         res.status(201).json("Creado correctamente")
     } catch (err) {
         res.status(500).json({ message: 'Error del lado interno del servidor: ', error: err.message })
