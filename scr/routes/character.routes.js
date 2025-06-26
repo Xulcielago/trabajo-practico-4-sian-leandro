@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { createCharacter, getALLCharacter } from '../controller/character.controller.js';
+const routerDBZ = Router();
+import { createCharacter } from '../controller/character.controller.js';
 
-const router = Router();
 
-router.post('/', [], createCharacter)
-router.get('/', getALLCharacter)
 
-export default router;
+routerDBZ.post("/character", createCharacter)
+//routerDBZ.get('/', getALLCharacter)
+
+export default routerDBZ

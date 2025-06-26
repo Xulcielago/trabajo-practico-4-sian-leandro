@@ -1,18 +1,18 @@
+
 import character from "../models/character.js";
 export const createCharacter = async (req, res) =>{
-    const {name, ki, race, gender, description } = req.body;
-
     try{
-        const product = await Product.create({name, ki, race, gender, description });
-        res.status(201).json(character);
+        const char = await character.create(req.body)
+        res.status(201).json(char)
     } catch (err) {
-        res.status(500).json({error: err.message});
+        res.status(500).json({error: err.message})
 
     }
 
 };
+/*
 
-export const getALLProduct = async (req, res) => {
+export const getALLCharacter = async (req, res) => {
     try{
         const characters = await Character.findALL();
         res.json({
@@ -28,7 +28,10 @@ export const getALLProduct = async (req, res) => {
 
   res.status(201).json(product);
 };
+
+*/
 /*
+
 export const updateProducts = async (req, res) => {
     try{
         const products = await Product.updateALL();

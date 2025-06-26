@@ -1,16 +1,15 @@
 import express from "express";
-import dotenv from "dotenv";
-dotenv.config()
+import routerDBZ from "./scr/routes/character.routes.js";
 import { startDb } from "./scr/config/database.js";
 
-
-//Leyendo variables de entorno nativamente
-process.loadEnvFile();
+import dotenv from "dotenv";
+dotenv.config()
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-
+app.use(express.json());
+app.use("/api", routerDBZ);
 
 app.listen(PORT, async () => { 
     await startDb();

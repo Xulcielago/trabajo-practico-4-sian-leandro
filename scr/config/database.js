@@ -1,19 +1,23 @@
-import { Sequelize } from "sequelize";
-import "dotenv/config";
+import {Sequelize} from "sequelize";
+import dotenv from "dotenv";
+dotenv.config()
 
-// establecemos la conexion
-export const sequelize = new Sequelize("test_database", "root", "", {
-  host: "localhost",
-  dialect: "mysql",
-});
+export const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER, 
+  process.env.DB_PASSWORD, 
+  {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+  }
+);
 
-// testeamos la conexion
 export const startDb = async () => {
   try {
-    await sequelize.authenticate();
-    console.log("Conexion exitosa.");
-    await sequelize.sync();
+    await sequelize.authenticate()
+    console.log("Conexion exitosa.")
+    await sequelize.sync()
   } catch (error) {
-    console.error("No se pudo conectar a la db:", error);
+    console.error("No se pudo conectar a la db:", error)
   }
-};
+}
